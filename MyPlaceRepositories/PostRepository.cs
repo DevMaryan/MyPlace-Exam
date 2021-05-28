@@ -59,8 +59,7 @@ namespace MyPlaceRepositories
 
         public List<Post> FilteredByEmail(string email)
         {
-            //return _dbContext.Identiy.Where(x => x.Email.Contains(email)).ToList();
-            throw new NotImplementedException();
+            return _dbContext.Posts.Where(x => x.Email.Contains(email)).ToList();
         }
     }
 

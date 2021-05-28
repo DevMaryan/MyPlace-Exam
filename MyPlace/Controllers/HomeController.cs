@@ -20,17 +20,22 @@ namespace MyPlace.Controllers
             _service = service;
         }
 
-        public IActionResult Index(string email)
+        public IActionResult Index()
         {
 
-            var UserPosts = _service.GetPostsByEmail(email);
-            // Show All Posts
             var allPosts = _service.GetAllNotPrivate();
 
             var viewModels = allPosts.Select(x => x.ToPostModel()).ToList();
             return View(viewModels);
         }
 
+        public IActionResult Search(string email)
+        {
+            var UserPosts = _service.GetPostsByEmail(email);
+            var viewModels = UserPosts.Select(x => x.ToPostModel()).ToList();
+
+            return View(viewModels);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
