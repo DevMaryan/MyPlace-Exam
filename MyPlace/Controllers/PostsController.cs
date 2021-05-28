@@ -28,7 +28,9 @@ namespace MyPlace.Controllers
             ViewBag.SuccessMessage = successMessage;
             var allPosts = _service.GetByAll();
 
-            var viewModels = allPosts.Select(x => x.ToPostModel()).ToList();
+            var userEmail = User.FindFirst(ClaimTypes.Name).Value;
+
+            var viewModels = allPosts.Select(x => x.ToPostModel()).Where(x => x.Email == userEmail).ToList();
             return View(viewModels);
         }
 
