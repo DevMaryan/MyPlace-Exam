@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using MyPlace.Mappings;
+using MyPlaceModels;
+using MyPlaceRepositories;
+using MyPlaceServices.Interfaces;
+
+namespace MyPlace.Controllers
+{
+    public class PostsController : Controller
+    {
+        public IPostService _service { get; set; }
+
+        public PostsController(IPostService service)
+        {
+            _service = service;
+        }
+
+        // GET: Posts
+        public IActionResult Index()
+        {
+            var allPosts = _service.GetByAll();
+
+            var viewModels = allPosts.Select(x => x.ToPostModel()).ToList();
+            return View(viewModels);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var thePost = _service.GetById(id);
+            return View(thePost);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Post post)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _service.Create(post);
+                }
+                return RedirectToAction("Index", "Posts", new { SuccessMessage = "New post added." });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var the_post = _service.GetDetails(id);
+            return View(the_post);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Post post)
+        {
+            try
+            {
+                _service.UpdatePost(post);
+                return RedirectToAction("Index", "Posts", new { SuccessMessage = "The post is updates." });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _service.Delete(id);
+                return RedirectToAction("Index", "Posts", new { SuccessMessage = "The post is deleted." });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+    }
+
+}
