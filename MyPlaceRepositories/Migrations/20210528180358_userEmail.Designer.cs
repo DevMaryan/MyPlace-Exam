@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyPlaceRepositories;
 
 namespace MyPlaceRepositories.Migrations
 {
     [DbContext(typeof(MyPlaceDbContext))]
-    partial class MyPlaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210528180358_userEmail")]
+    partial class userEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

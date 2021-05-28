@@ -7,7 +7,7 @@ namespace MyPlaceServices.Interfaces
 {
     public interface IPostService
     {
-        void Create(Post post);
+        void Create(Post post, string userEmail);
         Post GetById(int id);
         void Delete(int id);
 
@@ -17,5 +17,6 @@ namespace MyPlaceServices.Interfaces
         List<Post> GetAllNotPrivate();
 
         Post GetDetails(int id);
+        List<Post> GetPostsByEmail(string email);
     }
 }

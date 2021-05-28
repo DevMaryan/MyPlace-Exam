@@ -56,6 +56,12 @@ namespace MyPlaceRepositories
             _dbContext.Posts.Update(the_post);
             _dbContext.SaveChanges();
         }
+
+        public List<Post> FilteredByEmail(string email)
+        {
+            //return _dbContext.Identiy.Where(x => x.Email.Contains(email)).ToList();
+            throw new NotImplementedException();
+        }
     }
 
 }

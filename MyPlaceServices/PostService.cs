@@ -18,10 +18,11 @@ namespace MyPlaceServices
 
 
         // Create Post
-        public void Create(Post post)
+        public void Create(Post post, string userEmail)
         {
             if(post != null)
             {
+                post.Email = userEmail;
                 post.DateCreated = DateTime.UtcNow;
                 _postsRepository.Create(post);
             }
@@ -71,7 +72,22 @@ namespace MyPlaceServices
             {
                 the_post.ImageUrl = post.ImageUrl;
                 the_post.IsPrivate = post.IsPrivate;
-                the_post.DateUpdated = DateTime.UtcNow;
+                the_post.DateUpdated = DateTime.Now;
+                _postsRepository.UpdatePost(the_post);
+            }
+        }
+
+        // Search
+
+        public List<Post> GetPostsByEmail(string email)
+        {
+            if(email == null)
+            {
+                return _postsRepository.GetAllNotPrivate();
+            }
+            else
+            {
+                return _postsRepository.FilteredByEmail(email);
             }
         }
 

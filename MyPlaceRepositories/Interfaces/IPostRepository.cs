@@ -16,5 +16,6 @@ namespace MyPlaceRepositories.Interfaces
         Post GetById(int id);
 
         void UpdatePost(Post the_post);
+        List<Post> FilteredByEmail(string email);
     }
 }

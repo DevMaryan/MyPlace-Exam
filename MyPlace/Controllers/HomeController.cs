@@ -23,7 +23,7 @@ namespace MyPlace.Controllers
         public IActionResult Index(string email)
         {
 
-
+            var UserPosts = _service.GetPostsByEmail(email);
             // Show All Posts
             var allPosts = _service.GetAllNotPrivate();
 

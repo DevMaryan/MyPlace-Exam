@@ -15,6 +15,7 @@ namespace MyPlace.Mappings
             {
                 ImageUrl = viewModel.ImageUrl,
                 IsPrivate = viewModel.IsPrivate,
+                Email = viewModel.Email,
             };
         }
         public static Post ToModel(this PostUpdateModel viewModel)
@@ -23,6 +24,7 @@ namespace MyPlace.Mappings
             {
                 Id = viewModel.Id,
                 ImageUrl = viewModel.ImageUrl,
+                Email = viewModel.Email,
                 IsPrivate = viewModel.IsPrivate,
             };
         }

@@ -9,7 +9,7 @@ namespace MyPlace.ViewModels
     {
         public string ImageUrl { get; set; }
         public bool IsPrivate { get; set; }
-
         public string Email { get; set; }
+
     }
 }

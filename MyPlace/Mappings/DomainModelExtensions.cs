@@ -15,6 +15,7 @@ namespace MyPlace.Mappings
             {
                 Id = post.Id,
                 ImageUrl = post.ImageUrl,
+                Email = post.Email,
                 IsPrivate = post.IsPrivate,
                 DateCreated = post.DateCreated,
                 DateUpdated = post.DateUpdated,
@@ -25,6 +26,7 @@ namespace MyPlace.Mappings
             return new PostUpdateModel()
             {
                 ImageUrl = post.ImageUrl,
+                Email = post.Email,
                 IsPrivate = post.IsPrivate,
             };
         }

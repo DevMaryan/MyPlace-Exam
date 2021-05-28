@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -49,7 +50,11 @@ namespace MyPlace.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _service.Create(post);
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        var userEmail = User.FindFirst(ClaimTypes.Name).Value;
+                        _service.Create(post, userEmail);
+                    }
                 }
                 return RedirectToAction("Index", "Posts", new { SuccessMessage = "New post added." });
             }
