@@ -23,8 +23,9 @@ namespace MyPlace.Controllers
         }
 
         // GET: Posts
-        public IActionResult Index()
+        public IActionResult Index(string successMessage)
         {
+            ViewBag.SuccessMessage = successMessage;
             var allPosts = _service.GetByAll();
 
             var viewModels = allPosts.Select(x => x.ToPostModel()).ToList();
