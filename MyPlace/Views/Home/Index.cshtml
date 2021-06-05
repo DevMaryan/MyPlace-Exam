@@ -9,7 +9,7 @@
 <div class="text-center d-md-flex row">
     @foreach (var item in Model)
     {
-
+    <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none;">
         <div class="card" style="width: 220px;margin:10px;">
             <img src="@item.ImageUrl" alt="Card image cap" style="width:220px;height:120px;object-fit:cover;">
             <div class="card-body">
@@ -17,5 +17,6 @@
                 <p>@item.Email</p>
             </div>
         </div>
+    </a>
     }
 </div>

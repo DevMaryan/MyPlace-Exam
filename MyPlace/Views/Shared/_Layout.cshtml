@@ -51,6 +51,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -60,14 +61,13 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Create">Create</a>
                             </li>
                         }
+                        <form action="/Home/Search" method="get" id="search_bar">
+                            <input type="text" name="Email" value="" class="search_bar_input" placeholder="search by email" />
+                            <input type="submit" value="Search" class="btn btn-primary" />
+                        </form>
                     </ul>
                 </div>
-                <div>
-                    <form action="/Home/Search" method="get" id="search_bar">
-                        <input type="text" name="Email" value="" class="search_bar_input" placeholder="search by email" />
-                        <input type="submit" value="Search" class="btn btn-primary" />
-                    </form>
-                </div>
+
             </div>
         </nav>
     </header>

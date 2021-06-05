@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,7 @@ namespace MyPlace.Controllers
 {
     public class PostsController : Controller
     {
-        public IPostService _service { get; set; }
+        private IPostService _service { get; set; }
 
         public PostsController(IPostService service)
         {
@@ -39,13 +40,13 @@ namespace MyPlace.Controllers
             var thePost = _service.GetById(id);
             return View(thePost);
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult Create(Post post)
         {
@@ -57,22 +58,24 @@ namespace MyPlace.Controllers
                     {
                         var userEmail = User.FindFirst(ClaimTypes.Name).Value;
                         _service.Create(post, userEmail);
+                        return RedirectToAction("Index", "Posts", new { SuccessMessage = "New post added." });
                     }
                 }
-                return RedirectToAction("Index", "Posts", new { SuccessMessage = "New post added." });
+                return RedirectToAction("Index", "Posts", new { SuccessMessage = "Error." });
             }
             catch
             {
                 return View();
             }
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
             var the_post = _service.GetDetails(id);
             return View(the_post);
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult Edit(Post post)
         {
@@ -86,7 +89,7 @@ namespace MyPlace.Controllers
                 return View();
             }
         }
-
+        [Authorize]
         public IActionResult Delete(int id)
         {
             try
